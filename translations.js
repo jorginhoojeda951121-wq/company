@@ -408,7 +408,7 @@ document.querySelectorAll("[data-url]").forEach((link) => {
 });
 
 function isMobileNav() {
-    return window.matchMedia("(max-width: 900px)").matches;
+    return window.matchMedia("(max-width: 1120px)").matches;
 }
 
 function closeMobileNav() {
