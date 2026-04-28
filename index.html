@@ -16,8 +16,11 @@
                 <img class="logo-image" src="logo.png" alt="Mediaxtreme logo">
                 <span class="brand-name">MEDIAXTREME<small>LLC</small></span>
             </div>
+            <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Open navigation menu">
+                ☰
+            </button>
 
-            <ul class="nav-links">
+            <ul class="nav-links" id="primaryNav">
                 <li class="dropdown">
                     <a href="#" data-key="nav_media">Media &amp; Broadcast ▾</a>
                     <div class="dropdown-content">
@@ -72,6 +75,7 @@
                 </li>
             </ul>
         </nav>
+        <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
     </header>
 
     <section class="hero">

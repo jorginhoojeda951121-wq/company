@@ -353,6 +353,9 @@ const translations = {
 };
 
 const currentLang = document.getElementById("current-lang");
+const menuToggle = document.getElementById("menuToggle");
+const primaryNav = document.getElementById("primaryNav");
+const navOverlay = document.getElementById("navOverlay");
 const confirmBtn = document.getElementById("confirmBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 const modal = document.getElementById("redirectModal");
@@ -404,6 +407,58 @@ document.querySelectorAll("[data-url]").forEach((link) => {
     });
 });
 
+function isMobileNav() {
+    return window.matchMedia("(max-width: 900px)").matches;
+}
+
+function closeMobileNav() {
+    primaryNav.classList.remove("is-open");
+    navOverlay.classList.remove("is-open");
+    document.body.classList.remove("mobile-nav-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.textContent = "☰";
+    document.querySelectorAll(".dropdown.is-open").forEach((item) => item.classList.remove("is-open"));
+}
+
+menuToggle.addEventListener("click", () => {
+    const isOpen = primaryNav.classList.toggle("is-open");
+    navOverlay.classList.toggle("is-open", isOpen);
+    document.body.classList.toggle("mobile-nav-open", isOpen);
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.textContent = isOpen ? "✕" : "☰";
+    if (!isOpen) {
+        document.querySelectorAll(".dropdown.is-open").forEach((item) => item.classList.remove("is-open"));
+    }
+});
+
+navOverlay.addEventListener("click", closeMobileNav);
+
+document.querySelectorAll(".dropdown > a").forEach((trigger) => {
+    trigger.addEventListener("click", (event) => {
+        if (!isMobileNav()) {
+            return;
+        }
+        const parent = trigger.parentElement;
+        const submenu = parent ? parent.querySelector(".dropdown-content") : null;
+        if (!submenu) {
+            closeMobileNav();
+            return;
+        }
+        event.preventDefault();
+        const willOpen = !parent.classList.contains("is-open");
+        document.querySelectorAll(".dropdown.is-open").forEach((item) => item.classList.remove("is-open"));
+        if (willOpen) {
+            parent.classList.add("is-open");
+        }
+    });
+});
+
+window.addEventListener("resize", () => {
+    if (!isMobileNav()) {
+        closeMobileNav();
+    }
+});
+
 confirmBtn.addEventListener("click", () => {
     if (pendingUrl) {
         window.open(pendingUrl, "_blank", "noopener,noreferrer");
@@ -428,4 +483,5 @@ document.addEventListener("keydown", (event) => {
 window.addEventListener("DOMContentLoaded", () => {
     const saved = localStorage.getItem("preferredLang") || "en";
     setLanguage(saved);
+    closeMobileNav();
 });
