@@ -22,8 +22,8 @@ body {
 
 .logo-image {
     width: auto;
-    height: 38px;
-    max-width: min(34vw, 170px);
+    height: 100px;
+    max-width: min(56vw, 460px);
     object-fit: contain;
     display: block;
 }
@@ -93,7 +93,7 @@ header {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--navy);
+    color: #0055B8;
     font-weight: 500;
     font-size: 0.86rem;
     transition: 0.3s;
@@ -230,6 +230,10 @@ footer {
 }
 
 .footer-col p {
+    margin: 0;
+}
+
+.footer-col h4 {
     margin: 0;
 }
 
@@ -404,8 +408,8 @@ body[dir="rtl"] .dropdown-content {
     }
 
     .logo-image {
-        height: 32px;
-        max-width: min(42vw, 150px);
+        height: 80px;
+        max-width: min(78vw, 360px);
     }
 
     .brand-name {
@@ -427,7 +431,7 @@ body[dir="rtl"] .dropdown-content {
         padding: 42px 16px 16px;
     }
 
-    .footer-col h4 {
+    .footer-col:not(:first-child) h4 {
         margin: 0 0 10px;
     }
 
@@ -447,8 +451,8 @@ body[dir="rtl"] .dropdown-content {
     }
 
     .logo-image {
-        height: 34px;
-        max-width: min(38vw, 160px);
+        height: 88px;
+        max-width: min(66vw, 400px);
     }
 }
 
